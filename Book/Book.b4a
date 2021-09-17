@@ -1,0 +1,116 @@
+﻿Version=6.3
+NumberOfModules=5
+Module1=Starter
+Module2=list
+Module3=fave
+Module4=search
+Module5=text
+Build1=Default,ir.seyed.blog
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="19"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~
+IconFile=
+NumberOfFiles=8
+File1=blog.png
+File2=data.db
+File3=iran sans.ttf
+File4=list.bal
+File5=menu.bal
+File6=search.bal
+File7=seyed icon1.png
+File8=text.bal
+NumberOfLibraries=6
+Library1=core
+Library2=phone
+Library3=farakhani
+Library4=sql
+Library5=textsetting
+Library6=rakroidsend
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: (learningb4a.blog.ir)سورس کامل کتاب
+	#VersionCode: 1
+	#VersionName: 1.0.0
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: portrait
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: False
+#End Region
+'ساخته شده توسط Group Seyed 
+'*****************************************تمامی حقوق برای سازنده محفوظ است و اشتراک سورس با نام خود حرام است.*********************************
+'*****************************************این سورس جنبه آموزشی دارد و هرگونه کپی برداری از سورس (نه برنامه) حرام است.*****************************
+Sub Process_Globals
+
+End Sub
+
+Sub Globals
+	Private bg As Panel
+	Private blog As ImageView
+	Private btn_about As Button
+	Private btn_close As Button
+	Private btn_fave As Button
+	Private btn_list As Button
+	Private btn_search As Button
+	Private Label1 As Label
+	Private Panel1 As Panel
+End Sub
+
+Sub Activity_Create(FirstTime As Boolean)
+	Activity.LoadLayout("menu")
+
+End Sub
+
+
+#Region click
+
+Sub btn_search_Click'کلید جستجو
+StartActivity(search)
+Activity.Finish	
+End Sub
+
+
+Sub btn_list_Click'کلید لیست مطالب
+StartActivity(list)
+Activity.Finish		
+End Sub
+
+Sub btn_fave_Click'کلید علاقه مندی ها
+StartActivity(fave)
+Activity.Finish	
+End Sub
+
+Sub btn_close_Click'کلید خروج
+Dim a As Int
+a=Msgbox2("آیا قصد خروج دارید","","بله","خیر","",Null)	
+If a=DialogResponse.POSITIVE Then
+Activity.Finish
+ExitApplication	
+Dim p As PhoneIntents
+StartActivity(p.OpenBrowser("learningb4a.blog.ir"))			
+	
+End If	
+	
+End Sub
+
+Sub btn_about_Click'کلید درباره ما
+Msgbox("ساخته شده توسط GroupSeyed","learningb4a.blog.ir")
+ToastMessageShow("Create By GroupSeyed",False)	
+	
+End Sub
+
+Sub blog_Click'لینک وبلاگ
+Dim p As PhoneIntents
+StartActivity(p.OpenBrowser("learningb4a.blog.ir"))		
+ToastMessageShow("در حال ورود به سایت...",False)		
+End Sub
+#End Region
+
+
+Sub Activity_KeyPress (KeyCode As Int) As Boolean 
+	If KeyCode = KeyCodes.KEYCODE_BACK Then
+btn_close_Click
+	End If
+
+End Sub
